@@ -49,15 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(data)
         };
         const resp = fetch_function(url, options);
-        // const promise = resp.then(function(result) {
-        //     return result;
-        //   });
-        // const val = resp.json();
-        // let a;
-        // resp.then(function(response){
-        //     let a = response;
-        // });
-        // resp.resolve()
+      
         resp.then(function(value) {console.log(value);
             console.log(value.ERROR);
             if (value.ERROR==null){
@@ -68,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         function(error) {errormssg=error}
       );
-        // console.log(Object.keys(errormssg));
+        console.log(resp);
         
 
     });
@@ -105,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
         
-        
+                console.log(resp);
     });
 
     document.querySelectorAll(".form__input").forEach(inputElement => {

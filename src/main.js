@@ -49,19 +49,19 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(data)
         };
         const resp = fetch_function(url, options);
-      
-        resp.then(function(value) {console.log(value);
+
+        resp.then(function(value) {
+            console.log(value);
             console.log(value.ERROR);
             if (value.ERROR==null){
-                setFormMessage(loginForm, "success", "Correct Login");
+                setFormMessage(loginForm, "success", value.message);
+                
+                window.location.href = "movies.html";
             }else{
-                setFormMessage(loginForm, "error", "Invalid username/password combination");
+                setFormMessage(loginForm, "error", value.ERROR);
             }
-        },
-        function(error) {errormssg=error}
-      );
+        }, function(error) {errormssg=error});
         console.log(resp);
-        
 
     });
 
@@ -87,17 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
             resp.then(function(value) {console.log(value);
                 console.log(value.ERROR);
                 if (value.ERROR==null){
-                    setFormMessage(createAccountForm, "success", "User created successfully");
+                    setFormMessage(createAccountForm, "success", value.message);
                 }else{
-                    setFormMessage(createAccountForm, "error", "Invalid username/password combination");
+                    setFormMessage(createAccountForm, "error", value.ERROR);
                 }
             },
             function(error) {errormssg=error}
           );
-
         }
         
-                console.log(resp);
+        
     });
 
     document.querySelectorAll(".form__input").forEach(inputElement => {
@@ -117,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
 async function  fetch_function(url, options){
     const response = await fetch(url, options);
     const data = await response.json();
-    // console.log(data);
     return data;
     
 }
